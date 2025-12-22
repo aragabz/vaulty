@@ -8430,6 +8430,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-edge-to-edge@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "react-native-edge-to-edge@npm:1.7.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/809dcf1c68f79cff788963ec7691b37024986e82470be5047bfbe42929fc2c7d45db23eab816321e776f0bb3a8295f7efa526377bce6a559c10681cd409d597d
+  languageName: node
+  linkType: hard
+
 "react-native-gesture-handler@npm:^2.30.0":
   version: 2.30.0
   resolution: "react-native-gesture-handler@npm:2.30.0"
@@ -9973,6 +9983,7 @@ __metadata:
     react-i18next: "npm:^16.5.0"
     react-native: "npm:0.83.1"
     react-native-dotenv: "npm:^3.4.11"
+    react-native-edge-to-edge: "npm:^1.7.0"
     react-native-gesture-handler: "npm:^2.30.0"
     react-native-mmkv: "npm:^4.1.0"
     react-native-nitro-modules: "npm:^0.31.10"
