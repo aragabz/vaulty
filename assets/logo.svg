@@ -1,0 +1,11 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Vault icon -->
+  <rect x="40" y="50" width="120" height="130" rx="10" fill="#3b82f6" stroke="#1e40af" stroke-width="4"/>
+  <circle cx="100" cy="115" r="30" fill="#1e40af"/>
+  <circle cx="100" cy="115" r="20" fill="#3b82f6"/>
+  <rect x="95" y="115" width="10" height="30" fill="#1e40af"/>
+  <circle cx="100" cy="145" r="5" fill="#1e40af"/>
+  <!-- Lock indicator -->
+  <rect x="85" y="30" width="30" height="25" rx="15" fill="none" stroke="#3b82f6" stroke-width="6"/>
+  <rect x="90" y="45" width="20" height="10" fill="#3b82f6"/>
+</svg>

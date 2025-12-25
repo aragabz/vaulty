@@ -4,6 +4,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {KeyboardProvider} from 'react-native-keyboard-controller';
 import FlashMessage from 'react-native-flash-message';
+import BootSplash from 'react-native-bootsplash';
 import {ErrorBoundary} from './src/components/ErrorBoundary';
 import {enableEdgeToEdge} from './src/utils/edgeToEdge';
 import {useThemeStore} from './src/store';
@@ -13,6 +14,15 @@ function AppContent() {
 
   useEffect(() => {
     enableEdgeToEdge();
+    
+    // Hide splash screen after app is ready
+    const init = async () => {
+      // Simulate app initialization (remove this in production)
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await BootSplash.hide({fade: true});
+    };
+
+    init();
   }, []);
 
   return (
