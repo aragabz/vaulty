@@ -1,15 +1,28 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '../hooks';
 import {ThemeToggle} from '../components/ThemeToggle';
 import {ThemeSelector} from '../components/ThemeSelector';
 
 export const HomeScreen = () => {
   const {colors, spacing} = useTheme();
+  const insets = useSafeAreaInsets();
 
   return (
     <View style={[styles.container, {backgroundColor: colors.background}]}>
-      <ScrollView contentContainerStyle={[styles.content, {gap: spacing.lg}]}>
+      <ScrollView 
+        contentContainerStyle={[
+          styles.content, 
+          {
+            gap: spacing.lg,
+            paddingTop: insets.top + spacing.md,
+            paddingBottom: insets.bottom + spacing.md,
+            paddingLeft: insets.left + spacing.md,
+            paddingRight: insets.right + spacing.md,
+          }
+        ]}
+      >
         <Text style={[styles.title, {color: colors.text}]}>Home Screen</Text>
         
         <View style={[styles.card, {backgroundColor: colors.card, padding: spacing.md}]}>
@@ -59,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    padding: 16,
+    flexGrow: 1,
   },
   title: {
     fontSize: 32,

@@ -25,4 +25,5 @@ export {
   setDarkSystemBars,
   setLightSystemBars,
   setAutoSystemBars,
+  updateSystemBarsForTheme,
 } from './edgeToEdge';
