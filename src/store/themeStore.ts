@@ -1,6 +1,7 @@
 import {create} from 'zustand';
 import {persist, createJSONStorage, StateStorage} from 'zustand/middleware';
 import {storage} from '../utils/storage';
+import {Appearance} from 'react-native';
 
 // Custom MMKV storage adapter for Zustand
 const mmkvStorage: StateStorage = {
@@ -15,25 +16,54 @@ const mmkvStorage: StateStorage = {
   },
 };
 
-type Theme = 'light' | 'dark' | 'auto';
+export type ThemeMode = 'light' | 'dark' | 'auto';
 
 interface ThemeState {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
+  themeMode: ThemeMode;
+  isDark: boolean;
+  setThemeMode: (mode: ThemeMode) => void;
   toggleTheme: () => void;
+  updateSystemTheme: () => void;
 }
+
+const getSystemTheme = (): boolean => {
+  return Appearance.getColorScheme() === 'dark';
+};
+
+const resolveIsDark = (mode: ThemeMode): boolean => {
+  if (mode === 'auto') {
+    return getSystemTheme();
+  }
+  return mode === 'dark';
+};
 
 export const useThemeStore = create<ThemeState>()(
   persist(
-    set => ({
-      theme: 'light',
+    (set, get) => ({
+      themeMode: 'auto',
+      isDark: getSystemTheme(),
 
-      setTheme: theme => set({theme}),
+      setThemeMode: mode =>
+        set({
+          themeMode: mode,
+          isDark: resolveIsDark(mode),
+        }),
 
-      toggleTheme: () =>
-        set(state => ({
-          theme: state.theme === 'light' ? 'dark' : 'light',
-        })),
+      toggleTheme: () => {
+        const currentMode = get().themeMode;
+        const newMode = currentMode === 'light' ? 'dark' : 'light';
+        set({
+          themeMode: newMode,
+          isDark: newMode === 'dark',
+        });
+      },
+
+      updateSystemTheme: () => {
+        const mode = get().themeMode;
+        if (mode === 'auto') {
+          set({isDark: getSystemTheme()});
+        }
+      },
     }),
     {
       name: 'theme-storage',
@@ -41,3 +71,8 @@ export const useThemeStore = create<ThemeState>()(
     },
   ),
 );
+
+// Listen to system theme changes
+Appearance.addChangeListener(() => {
+  useThemeStore.getState().updateSystemTheme();
+});
